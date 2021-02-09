@@ -4,7 +4,7 @@ description 'Police'
 
 client_scripts {
 	'config.lua',
-	'client/job.lua',
+	'client/main.lua',
 }
 
 server_scripts {
