@@ -17,7 +17,7 @@ AddEventHandler("fizzfau-rental:rent", function(k, v, plate, store)
         TriggerClientEvent("fizzfau-rental:spawnVehicle", source, k, v, plate)
         TriggerEvent("fizzfau-rental:startCounter", player)
     else
-        TriggerClientEvent("notification", source, "You have already rented a car!")
+        TriggerClientEvent("notification", source, "Zaten kiralamış olduğun bir araç var, önce o aracı teslim et!")
     end
 end)
 
@@ -37,10 +37,14 @@ AddEventHandler("fizzfau-rental:giveback", function(health)
 end)
 
 RegisterServerEvent("fizzfau-rental:update")
-AddEventHandler("fizzfau-rental:update", function(vehicle)
+AddEventHandler("fizzfau-rental:update", function(vehicle, bool)
     local player = ESX.GetPlayerFromId(source)
     local identifier = player.identifier
-    VehiclesRented[identifier].vehicle = vehicle
+    if bool then
+        VehiclesRented[identifier] = nil
+        return
+    end
+    VehiclesRented[identifier].vehicle = vehicle    
 end)
 
 RegisterServerEvent("fizzfau-rental:getVehicle")
@@ -67,8 +71,8 @@ AddEventHandler("fizzfau-rental:startCounter", function(player)
                         player.removeMoney(VehiclesRented[identifier].price)
                     else
                         if Config.ESXBilling then
-                            TriggerEvent("esx_billing:sendBill", source, VehiclesRented[identifier].store, VehiclesRented[identifier].plate.. " - ", VehiclesRented[identifier].price)
-                            TriggerEvent("notification", source, "Check your bills!")
+                            TriggerEvent("esx_billing:sendBill", source, VehiclesRented[identifier].store, VehiclesRented[identifier].plate.. " plakalı kiralık araç", VehiclesRented[identifier].price)
+                            TriggerEvent("notification", source, "Bu aracın parasını karşılayamadığınız ücret fatura olarak kesildi!")
                         end
                     end
                 end
