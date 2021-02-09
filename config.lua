@@ -20,15 +20,5 @@ Config = {
                 {name = "fugitive",label = "Fugitive", price = 1000, max_time = 6 --[[ hours ]]},
             }
         },
-        -- ["Palodicks"] = {
-        --     coords = {
-        --         rent = vector3(-82.3599, -1383.32, 29.291),
-        --         spawn = vector3(-90.6009, -1377.88, 29.284),
-        --         heading = 100.0 
-        --     },
-        --     Vehicles = {
-        --         ["blista"] = {label = "Blista", price = 100, max_time = 6 --[[ hours ]]}
-        --     }
-        -- },
     }
 }
